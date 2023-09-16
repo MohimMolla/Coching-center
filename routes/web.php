@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\InstructorsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\CommentsController;
 use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,14 @@ Route::resources([
 //user controller
 Route::controller(HomeController::class)->group( function(){
     Route::get("/", 'index');
+    //show single page course
+    Route::get("/course/single-page/{id}", 'course_single_')->name('course_single');
+    //show single page teacher
+    Route::get("/teacher/single-page/{id}", 'teacher_single')->name('teacher_single');
 });
+//use here laravel resources Method  user 
+Route::resources([
+    'comments' =>CommentsController::class,
+]);
 
 require __DIR__.'/auth.php';
